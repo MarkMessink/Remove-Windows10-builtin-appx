@@ -55,11 +55,11 @@ Begin {
 		###	"Microsoft.WindowsFeedbackHub", 
 			"Microsoft.WindowsMaps" #, 
 		###	"Microsoft.WindowsSoundRecorder", 
-		###	"Microsoft.YourPhone"
+		###	"Microsoft.YourPhone,"
 		
 	# APPx that shouldn't be removed
 	
-		"Microsoft.WindowsStore", # Cannot be reinstalled
+		"Microsoft.WindowsStore" # Cannot be reinstalled
 	
     ))
 
