@@ -7,21 +7,21 @@
 	Documentatie: https://docs.microsoft.com/en-us/windows/application-management/apps-in-windows-10
 
 .EXAMPLE
-    .\RemoveBuiltinAppx2004.ps1
+    .\RemoveBuiltinAppx.ps1
 
 .NOTES
-    FileName:    RemoveBuiltinAppx2004.ps1
+    FileName:    RemoveBuiltinAppx.ps1
     Author:      Mark Messink
     Contact:     
-    Created:     2020-07-05
+    Created:     2020-09-29
     Updated:     
 
     Version history:
     1.0.0 - (2020-07-05) First script, Windows 10 version 2004
+	1.0.1 - (2020-09-29) Windows 10 version 20H2
 #>
 Begin {
     # White list of appx packages to keep installed
-	# Windows 10 version 2004 and previous versions
 	# XBOX and Zune are not listed, and will be removed by default
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
     $WhiteListedAppx.AddRange(@(
@@ -34,13 +34,13 @@ Begin {
 			"Microsoft.Microsoft3DViewer",
 			"Microsoft.MicrosoftOfficeHub",
 		###	"Microsoft.MicrosoftSolitaireCollection",
-		###	"Microsoft.MicrosoftStickyNotes", # can be installed from Microsoft Store
+		###	"Microsoft.MicrosoftStickyNotes",
 		###	"Microsoft.MixedReality.Portal",
 			"Microsoft.MSPaint",
-		###	"Microsoft.Office.OneNote", # can be installed from Microsoft Store
+		###	"Microsoft.Office.OneNote",
 		###	"Microsoft.People",
 		###	"Microsoft.ScreenSketch",
-		###	"Microsoft.SkypeApp", # Example: by excluding this line the Skype App will be removed
+		###	"Microsoft.SkypeApp",
 			"Microsoft.StorePurchaseApp",
 			"Microsoft.VCLibs.140.00",
 			"Microsoft.VP9VideoExtensions",
@@ -48,7 +48,7 @@ Begin {
 			"Microsoft.WebMediaExtensions",
 			"Microsoft.WebpImageExtension",
 		###	"Microsoft.Windows.Photos",
-		###	"Microsoft.WindowsAlarms", # can be installed from Microsoft Store
+		###	"Microsoft.WindowsAlarms",
 			"Microsoft.WindowsCalculator", 
 		###	"Microsoft.WindowsCamera", 
 		###	"Microsoft.WindowsCommunicationsApps", # Mail, Calendar etc
@@ -59,7 +59,7 @@ Begin {
 		
 	# APPx that shouldn't be removed
 	
-		###	"Microsoft.WindowsStore", # Cannot be reinstalled
+		"Microsoft.WindowsStore", # Cannot be reinstalled
 	
     ))
 
