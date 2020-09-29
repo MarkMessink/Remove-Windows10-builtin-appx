@@ -55,8 +55,12 @@ Begin {
 		###	"Microsoft.WindowsFeedbackHub", 
 			"Microsoft.WindowsMaps" #, 
 		###	"Microsoft.WindowsSoundRecorder", 
-		###	"Microsoft.WindowsStore", # Cannot be reinstalled
 		###	"Microsoft.YourPhone"
+		
+	# APPx that shouldn't be removed
+	
+		###	"Microsoft.WindowsStore", # Cannot be reinstalled
+	
     ))
 
 }
@@ -70,7 +74,7 @@ Process {
 
             [parameter(Mandatory=$false, HelpMessage="Name of the log file that the entry will written to.")]
             [ValidateNotNullOrEmpty()]
-            [string]$FileName = "log_RemoveAppx.txt"
+            [string]$FileName = "ilog_RemoveAppx.txt"
         )
         # Determine log file location
         $LogFilePath = Join-Path -Path C:\IntuneLogs -ChildPath "$($FileName)"
