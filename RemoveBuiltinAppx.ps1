@@ -13,8 +13,8 @@
     FileName:    RemoveBuiltinAppx.ps1
     Author:      Mark Messink
     Contact:     
-    Created:     2020-09-29
-    Updated:     
+    Created:     2020-07-05
+    Updated:     2020-09-29
 
     Version history:
     1.0.0 - (2020-07-05) First script, Windows 10 version 2004
@@ -25,6 +25,8 @@ Begin {
 	# XBOX and Zune are not listed, and will be removed by default
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
     $WhiteListedAppx.AddRange(@(
+		
+	##### Preinstalled APPx #####
 		###	"Microsoft.549981C3F5F10", # Cortana
 		###	"Microsoft.BingWeather",
 			"Microsoft.DesktopAppInstaller",
@@ -53,17 +55,17 @@ Begin {
 		###	"Microsoft.WindowsCamera", 
 		###	"Microsoft.WindowsCommunicationsApps", # Mail, Calendar etc
 		###	"Microsoft.WindowsFeedbackHub", 
-			"Microsoft.WindowsMaps" #, 
+			"Microsoft.WindowsMaps", 
 		###	"Microsoft.WindowsSoundRecorder", 
 		###	"Microsoft.YourPhone,"
 		
-	# APPx that shouldn't be removed
-	
-		"Microsoft.WindowsStore" # Cannot be reinstalled
+	##### APPx that shouldn't be removed #####
+			"Microsoft.WindowsStore" # Cannot be reinstalled
 	
     ))
 
 }
+
 Process {
     # Functions
     function Write-LogEntry {
@@ -88,7 +90,7 @@ Process {
         }
     }
 
-	# Aanmaken standaard logpath (als deze nog niet bestaat)
+	# Create logpath (if not exist)
 	$path = "C:\IntuneLogs"
 	If(!(test-path $path))
 	{
@@ -97,6 +99,7 @@ Process {
 
     # Initial logging
 	$date = get-date
+	Write-LogEntry -Value "-------------------------------------------------------------------------------"
     Write-LogEntry -Value "$date"
     Write-LogEntry -Value "Starting built-in AppxPackage, AppxProvisioningPackage removal process"
 
