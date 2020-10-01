@@ -15,55 +15,90 @@
     Contact:     
     Created:     2020-07-05
     Updated:     2020-09-29
+	
+		Information:
+	White list of appx packages to keep installed
+	XBOX and Zune are not listed, and will be removed by default
+	Create new list --> 'Get-AppxProvisionedPackage -online | FT Displayname'
 
     Version history:
+	1.0.0 - (2020-03-31) Windows 10 version 1803, 1809, 1903, and 1909
     1.0.0 - (2020-07-05) Windows 10 version 20H1 (2004)
-	1.0.1 - (2020-09-29) Windows 10 version 20H2
+	1.0.1 - (2020-10-01) Windows 10 version 20H2
+	
+	Microsoft Store:
+	The Store app can't be removed. If you want to remove and reinstall the Store app, you can only bring Store back by either restoring your system from a backup or resetting your system. 
+	Instead of removing the Store app, you should use group policies to hide or disable it.
+
 #>
 
 Begin {
-    # White list of appx packages to keep installed
-	# XBOX and Zune are not listed, and will be removed by default
-	# Create new list --> 'Get-AppxProvisionedPackage -online | FT Displayname'
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
-    $WhiteListedAppx.AddRange(@(
-		
-	##### Preinstalled APPx #####
-		###	"Microsoft.549981C3F5F10", # Cortana
-		###	"Microsoft.BingWeather",
-			"Microsoft.DesktopAppInstaller",
-		###	"Microsoft.GetHelp",
-		###	"Microsoft.GetStarted",
-			"Microsoft.HEIFImageExtension",
-			"Microsoft.Microsoft3DViewer",
-			"Microsoft.MicrosoftOfficeHub",
-		###	"Microsoft.MicrosoftSolitaireCollection",
-		###	"Microsoft.MicrosoftStickyNotes",
-		###	"Microsoft.MixedReality.Portal",
-			"Microsoft.MSPaint",
-		###	"Microsoft.Office.OneNote",
-		###	"Microsoft.People",
-		###	"Microsoft.ScreenSketch",
-		###	"Microsoft.SkypeApp",
-			"Microsoft.StorePurchaseApp",
-			"Microsoft.VCLibs.140.00",
-			"Microsoft.VP9VideoExtensions",
-		###	"Microsoft.Wallet",
-			"Microsoft.WebMediaExtensions",
-			"Microsoft.WebpImageExtension",
-		###	"Microsoft.Windows.Photos",
-		###	"Microsoft.WindowsAlarms",
-			"Microsoft.WindowsCalculator", 
-		###	"Microsoft.WindowsCamera", 
-		###	"Microsoft.WindowsCommunicationsApps", # Mail, Calendar etc
-		###	"Microsoft.WindowsFeedbackHub", 
-			"Microsoft.WindowsMaps", 
-		###	"Microsoft.WindowsSoundRecorder", 
-		###	"Microsoft.YourPhone,"
-		
-	##### APPx that shouldn't be removed #####
-			"Microsoft.WindowsStore" # Cannot be reinstalled
+
+<##### APPx that shouldn't be removed #####>
+	$WhiteListedAppx.AddRange(@(
+	"Microsoft.WindowsStore" # unsupported
+	))
+    	
+<##### Version: 1803 #####>
+	$WhiteListedAppx.AddRange(@(
+	###	"Microsoft.BingWeather",
+	"Microsoft.DesktopAppInstaller",
+	###	"Microsoft.GetHelp",
+	###	"Microsoft.GetStarted",
+	### "Microsoft.Messaging", # removed in 20H1
+	### "Microsoft.Microsoft3DViewer",
+	"Microsoft.MicrosoftOfficeHub",
+	###	"Microsoft.MicrosoftSolitaireCollection",
+	###	"Microsoft.MicrosoftStickyNotes",
+	"Microsoft.MSPaint",
+	###	"Microsoft.Office.OneNote",
+	### "Microsoft.OneConnect", # removed in 20H1
+	###	"Microsoft.People",
+	### "Microsoft.Print3D", # removed in 20H1
+	###	"Microsoft.SkypeApp",
+	"Microsoft.StorePurchaseApp",
+	###	"Microsoft.Wallet",
+	"Microsoft.WebMediaExtensions",
+	###	"Microsoft.Windows.Photos",
+	###	"Microsoft.WindowsAlarms",
+	"Microsoft.WindowsCalculator", 
+	###	"Microsoft.WindowsCamera", 
+	###	"Microsoft.WindowsCommunicationsApps", # Mail, Calendar etc
+	###	"Microsoft.WindowsFeedbackHub", 
+	"Microsoft.WindowsMaps" 
+	###	"Microsoft.WindowsSoundRecorder",
+	))
+
+<##### Version: 1809 #####>
+	$WhiteListedAppx.AddRange(@(
+	"Microsoft.HEIFImageExtension",
+	###	"Microsoft.MixedReality.Portal",
+	###	"Microsoft.ScreenSketch",
+	"Microsoft.VP9VideoExtensions",
+	"Microsoft.WebpImageExtension"
+	###	"Microsoft.YourPhone,"
+	))
 	
+<##### Version: 1903 #####>
+	$WhiteListedAppx.AddRange(@(
+	### "No new provisioned Windows APPx
+	))
+	
+<##### Version: 1909 #####>
+	$WhiteListedAppx.AddRange(@(
+	### "No new provisioned Windows APPx
+	))
+	
+<##### Version: 20H1 #####>
+	$WhiteListedAppx.AddRange(@(
+	###	"Microsoft.549981C3F5F10", # Cortana
+	"Microsoft.VCLibs.140.00"
+	))
+	
+<##### Version: 20H2 #####>
+	$WhiteListedAppx.AddRange(@(
+	### "No new provisioned Windows APPx
     ))
 
 }
@@ -102,7 +137,8 @@ Process {
     # Initial logging
 	$date = get-date
 	Write-LogEntry -Value "-------------------------------------------------------------------------------"
-    Write-LogEntry -Value "$date"
+    Write-LogEntry -Value "Script Version: 20H2 (2020-10-01)"
+	Write-LogEntry -Value "$date"
     Write-LogEntry -Value "Starting built-in AppxPackage, AppxProvisioningPackage removal process"
 
     # Determine provisioned apps
