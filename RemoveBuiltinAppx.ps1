@@ -17,12 +17,14 @@
     Updated:     2020-09-29
 
     Version history:
-    1.0.0 - (2020-07-05) First script, Windows 10 version 2004
+    1.0.0 - (2020-07-05) Windows 10 version 20H1 (2004)
 	1.0.1 - (2020-09-29) Windows 10 version 20H2
 #>
+
 Begin {
     # White list of appx packages to keep installed
 	# XBOX and Zune are not listed, and will be removed by default
+	# Create new list --> 'Get-AppxProvisionedPackage -online | FT Displayname'
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
     $WhiteListedAppx.AddRange(@(
 		
