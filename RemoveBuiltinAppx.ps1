@@ -16,7 +16,7 @@
     Created:     2020-07-05
     Updated:     2020-09-29
 	
-		Information:
+	Information:
 	White list of appx packages to keep installed
 	XBOX and Zune are not listed, and will be removed by default
 	Create new list --> 'Get-AppxProvisionedPackage -online | FT Displayname'
@@ -113,7 +113,7 @@ Process {
 
             [parameter(Mandatory=$false, HelpMessage="Name of the log file that the entry will written to.")]
             [ValidateNotNullOrEmpty()]
-            [string]$FileName = "ilog_RemoveAppx.txt"
+            [string]$FileName = "ilog_ps_RemoveAppx.txt"
         )
         # Determine log file location
         $LogFilePath = Join-Path -Path C:\IntuneLogs -ChildPath "$($FileName)"
