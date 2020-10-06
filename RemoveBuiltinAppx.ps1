@@ -101,6 +101,14 @@ Begin {
 	### "No new provisioned Windows APPx
     ))
 
+<##### Version: 21H1 - Insider Preview #####>
+	$WhiteListedAppx.AddRange(@(
+	"Microsoft.BingNews"
+	"Microsoft.Todos"
+	"Microsoft.UI.Xaml.2.2"
+	"Microsoft.UI.Xaml.2.4"
+	
+    ))
 }
 
 Process {
