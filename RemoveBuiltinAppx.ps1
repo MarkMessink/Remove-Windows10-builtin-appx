@@ -36,9 +36,11 @@ Begin {
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
 	
 <##### Microsoft Edge #####>
+	$WhiteListedAppx.AddRange(@(
 	"Microsoft.MicrosoftEdge.Stable"
 	"Microsoft.MicrosoftEdge.Beta"
 	"Microsoft.MicrosoftEdge.Dev"
+	))
 
 <##### APPx that shouldn't be removed #####>
 	$WhiteListedAppx.AddRange(@(
