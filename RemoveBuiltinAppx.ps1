@@ -34,6 +34,11 @@
 
 Begin {
     $WhiteListedAppx = New-Object -TypeName System.Collections.ArrayList
+	
+<##### Microsoft Edge #####>
+	"Microsoft.MicrosoftEdge.Stable"
+	"Microsoft.MicrosoftEdge.Beta"
+	"Microsoft.MicrosoftEdge.Dev"
 
 <##### APPx that shouldn't be removed #####>
 	$WhiteListedAppx.AddRange(@(
@@ -121,7 +126,7 @@ Process {
 
             [parameter(Mandatory=$false, HelpMessage="Name of the log file that the entry will written to.")]
             [ValidateNotNullOrEmpty()]
-            [string]$FileName = "ilog_ps_RemoveAppx.txt"
+            [string]$FileName = "pslog_RemoveAppx.txt"
         )
         # Determine log file location
         $LogFilePath = Join-Path -Path C:\IntuneLogs -ChildPath "$($FileName)"
