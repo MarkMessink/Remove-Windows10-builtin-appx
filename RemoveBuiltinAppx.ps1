@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     This script will remove all built-in appx with a provisioning package that's not specified in the 'white-list' in this script.
-	Documentatie: https://docs.microsoft.com/en-us/windows/application-management/apps-in-windows-10
+	Documentation: https://docs.microsoft.com/en-us/windows/application-management/apps-in-windows-10
 
 .EXAMPLE
     .\RemoveBuiltinAppx.ps1
@@ -14,7 +14,7 @@
     Author:      Mark Messink
     Contact:     
     Created:     2020-07-05
-    Updated:     2020-09-29
+    Updated:     2020-11-24
 	
 	Information:
 	White list of appx packages to keep installed
@@ -23,7 +23,7 @@
 
     Version history:
 	1.0.0 - (2020-03-31) Windows 10 version 1803, 1809, 1903, and 1909
-    1.0.0 - (2020-07-05) Windows 10 version 20H1 (2004)
+    1.0.0 - (2020-07-05) Windows 10 version 2004
 	1.0.1 - (2020-10-01) Windows 10 version 20H2
 	
 	Microsoft Store:
@@ -37,8 +37,8 @@ Begin {
 	
 <##### Microsoft Edge #####>
 	$WhiteListedAppx.AddRange(@(
-	"Microsoft.MicrosoftEdge.Stable"
-	"Microsoft.MicrosoftEdge.Beta"
+	"Microsoft.MicrosoftEdge.Stable",
+	"Microsoft.MicrosoftEdge.Beta",
 	"Microsoft.MicrosoftEdge.Dev"
 	))
 
@@ -67,14 +67,14 @@ Begin {
 	"Microsoft.StorePurchaseApp",
 	###	"Microsoft.Wallet",
 	"Microsoft.WebMediaExtensions",
-	###	"Microsoft.Windows.Photos",
-	###	"Microsoft.WindowsAlarms",
+	"Microsoft.Windows.Photos",
+	"Microsoft.WindowsAlarms",
 	"Microsoft.WindowsCalculator", 
-	###	"Microsoft.WindowsCamera", 
+	"Microsoft.WindowsCamera", 
 	###	"Microsoft.WindowsCommunicationsApps", # Mail, Calendar etc
 	###	"Microsoft.WindowsFeedbackHub", 
-	"Microsoft.WindowsMaps" 
-	###	"Microsoft.WindowsSoundRecorder",
+	"Microsoft.WindowsMaps",
+	"Microsoft.WindowsSoundRecorder"
 	))
 
 <##### Version: 1809 #####>
@@ -83,8 +83,8 @@ Begin {
 	###	"Microsoft.MixedReality.Portal",
 	###	"Microsoft.ScreenSketch",
 	"Microsoft.VP9VideoExtensions",
-	"Microsoft.WebpImageExtension"
-	###	"Microsoft.YourPhone,"
+	"Microsoft.WebpImageExtension",
+	"Microsoft.YourPhone"
 	))
 	
 <##### Version: 1903 #####>
@@ -97,7 +97,7 @@ Begin {
 	### "No new provisioned Windows APPx
 	))
 	
-<##### Version: 20H1 #####>
+<##### Version: 2004 #####>
 	$WhiteListedAppx.AddRange(@(
 	###	"Microsoft.549981C3F5F10", # Cortana
 	"Microsoft.VCLibs.140.00"
@@ -110,9 +110,9 @@ Begin {
 
 <##### Version: 21H1 - Insider Preview #####>
 	$WhiteListedAppx.AddRange(@(
-	"Microsoft.BingNews"
-	"Microsoft.Todos"
-	"Microsoft.UI.Xaml.2.2"
+	"Microsoft.BingNews",
+	"Microsoft.Todos",
+	"Microsoft.UI.Xaml.2.2",
 	"Microsoft.UI.Xaml.2.4"
 	
     ))
@@ -152,8 +152,9 @@ Process {
     # Initial logging
 	$date = get-date
 	Write-LogEntry -Value "-------------------------------------------------------------------------------"
-    Write-LogEntry -Value "Script Version: 20H2 (2020-10-01)"
+    Write-LogEntry -Value "Script Version: 20H2 (2020-11-23)"
 	Write-LogEntry -Value "$date"
+	Write-LogEntry -Value "-------------------------------------------------------------------------------"
     Write-LogEntry -Value "Starting built-in AppxPackage, AppxProvisioningPackage removal process"
 
     # Determine provisioned apps
@@ -166,7 +167,7 @@ Process {
 
         # If application name not in appx package white list, remove AppxPackage and AppxProvisioningPackage
         if (($App -in $WhiteListedAppx)) {
-            Write-LogEntry -Value "Skipping excluded application package: $($App)"
+            Write-LogEntry -Value ">>> Skipping excluded application package: $($App)"
         }
         else {
             # Gather package names
@@ -206,4 +207,6 @@ Process {
     # Complete
 	Write-LogEntry -Value "-------------------------------------------------------------------------------"
     Write-LogEntry -Value "Completed built-in AppxPackage, AppxProvisioningPackage removal process"
+	Write-LogEntry -Value "$date"
+	Write-LogEntry -Value "-------------------------------------------------------------------------------"
 }
