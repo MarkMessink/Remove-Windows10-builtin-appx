@@ -207,6 +207,5 @@ Process {
     # Complete
 	Write-LogEntry -Value "-------------------------------------------------------------------------------"
     Write-LogEntry -Value "Completed built-in AppxPackage, AppxProvisioningPackage removal process"
-	Write-LogEntry -Value "$date"
 	Write-LogEntry -Value "-------------------------------------------------------------------------------"
 }
